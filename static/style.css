@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@800&display=swap');
+
+:root {
+  /*--bg-color: #f2f4f8;*/
+  --bg-color: #f5f5f5;
+  --bg-color: #f5f7fa;
+}
+
+body {
+    /*background-color: #f2f4f8;*/
+    background-color: var(--bg-color);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-family: 'Inconsolata', monospace;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+}
+
+.title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-size: 2.5em;
+    float: left;
+}
+
+.subtitle {
+    font-family: 'Inconsolata', monospace;
+    font-weight: 600;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    float: right;
+    right: 0;
+    bottom: 0px;
+    position: absolute;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h5 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    margin-top: -10px;
+    margin-bottom: 0;
+}
+
+.value {
+    float: right;
+    font-weight: 700;
+}
+
+.row {
+    margin-right: 0;
+}
+
+.col-6 {
+    padding: 0;
+}
+
+.container {
+    margin: 0em;
+    padding: 4em;
+    max-width: none;
+}
+
+.main {
+    margin: 0;
+}
+
+.name {
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.number {
+    font-size: 1.5em;
+}
+
+.scrolling-wrapper-flexbox {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin-top: 1em;
+}
+
+.method-col {
+    
+}
+
+.card {
+    border-radius: 8px!important;
+    border-style: none!important;
+}
+
+.card-header {
+    font-size: 1em;
+    font-weight: 800;
+    background-color: white;
+    border-style: none;
+    border-radius: 8px!important;
+}
+
+.card-method {
+    min-width: 15em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    margin-top: 0;
+}
+
+.row > div.method-col:last-child > .card-method {
+    margin-right: 0;
+}
+
+.main > .card-method {
+    width: -webkit-fill-available;
+}
+
+.card-method > .card-header {
+    top: 0;
+    z-index: 10;
+}
+
+.card-general > .card-header {
+    
+}
+
+.card-users > .card-header {
+    top: 0;
+    z-index: 10;
+}
+
+.card-metrics {
+    margin: 0;
+    border-radius: 0;
+    border-style: none;
+}
+
+.card-general-metrics {
+    margin: 0;
+    border-radius: 0;
+    border-style: none;
+}
+
+.card-general {
+    margin: 0;
+    border-radius: 0;
+    border-style: none;
+    /*min-width: 250px;*/
+}
+
+.card-recommendations {
+    margin: 0;
+    border-radius: 0;
+    border-style: none;
+}
+
+.card-users {
+    border-style: none!important;
+}
+
+.list-group {
+    border-bottom-left-radius: 8px!important;
+    border-bottom-right-radius: 8px!important;
+}
+
+.list-group-item {
+    border: none;
+    border-style: none;
+    line-height: 0.5;
+}
+
+#list-tab {
+    overflow: scroll;
+    max-height: 35vh;   
+}
+
+li.borderless {
+    border-top: 0 none;
+}
+
+.dropdown-users {
+    display: none;
+}
+
+.card-recommendations > .list-group > .list-group-item {
+    padding-top: 0;
+}
+
+.card-metrics > .list-group > .list-group-item:last-child {
+    border-radius: 0;
+}
+
+.song-list {
+    max-height: 150px;
+    overflow: scroll;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.song {
+    font-size: 0.8em;
+    line-height: 2em;
+    
+    overflow: hidden;
+    white-space:nowrap;
+    /*text-overflow:ellipsis;*/
+    width:150px;
+    display:inline-block;
+}
+
+.tag {
+    font-size: 0.5em;
+    line-height: 0.5em;
+    background-color: lightgray;
+    background-color: #f5f7fa;
+    padding: 0.3em;
+    border-radius: 0.3em;
+}
+
+.correct {
+    background-color: palegreen;
+}
+
+.best {
+    background-color: paleturquoise;
+}
+
+.scroll_contant{
+  overflow:hidden;
+  width:180px;
+  white-space : nowrap;
+}

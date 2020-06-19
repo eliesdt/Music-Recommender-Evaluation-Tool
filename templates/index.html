@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="static/style.css">
+      
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <div class="container">
+    
+    <div class="row" style="margin-right: -1em;">
+      <div class="col-2">
+          
+          
+          
+            <div class="card card-method shadow-sm" style="min-width:0; width:100%;">
+                    
+                    <div class="card-header">
+                      <h3>Dataset</h3>
+                      <h5>Information</h5>
+                    </div>
+
+                    <div class="card card-general">
+
+                      {% for key, value in general_info.items() %}
+
+                        <div class="card-header">
+                          <span class="name">{{ key }}</span><br>
+                          <span class="number">{{ value }}</span>
+                        </div>
+
+                      {% endfor %}
+
+                    </div>
+
+            </div>
+        
+      </div>
+      <div class="col-10">
+        <div class="tab-content" id="nav-tabContent">
+            
+          <div class="card card-method shadow-sm" style="flex-direction: row; margin-right: 0; margin-left: -15px; padding-left: 15px;">
+                <span class="title" id="title">Overall performance</span>
+                <!--<span class="subtitle">ID: 12a4a991c8b53cd6906995caed8b1f2bd3b6436a</span>-->
+                <div class="dropdown subtitle">
+                  <button class="btn dropdown-toggle subtitle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select a user from the list
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right list-group dropdown-users" id="list-tab" role="tablist" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item active" id="list-main-list" data-toggle="list" href="#list-main" role="tab" aria-controls="main" href="#">Overall performance</a>
+                      <div class="dropdown-divider"></div>
+
+                      {% for user in users_list %}
+
+                        <a class="dropdown-item" id="list-{{ user }}-list" data-toggle="list" href="#list-{{ user }}" role="tab" aria-controls="home">{{ user }}</a>
+
+                      {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+            
+          <div class="tab-pane fade show active" id="list-main" role="tabpanel" aria-labelledby="list-main-list">
+              
+              <div class="row" style="width: 100%;">
+                <div class="col-6">
+                  <div class="card card-method shadow-sm" style="flex-direction: row; margin-right: 0; padding-left: 15px; margin-bottom: 0px;">
+                    <canvas id="line-chart" width="800" height="450"></canvas>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="card card-method shadow-sm" style="flex-direction: row; margin-left: 1em; margin-right: -1em; height: 100%;">
+
+                    <div class="col-6">
+                        <div class="card card-general">
+                          <div class="card-header">
+                            <h3>General stats</h3>
+                            <h5>for 5 methods</h5>
+                          </div>
+                          <div class="card-header">
+                            <span class="name">Best method</span><br>
+                            <span class="number">PT(P)-CS</span>
+                          </div>
+                          <div class="card-header">
+                            <span class="name">Best performance for</span><br>
+                            <span class="number">80% users</span>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="card card-general">
+                        <div class="card-header" style="height: 69px;"></div>
+                        <div class="card-header">
+                          <span class="name">Correct estimations</span><br>
+                          <span class="number">12.3%</span>
+                        </div>
+                        <div class="card-header">
+                          <span class="name">Based in</span><br>
+                          <span class="number">High-level feat.</span>
+                        </div>
+                      </div>
+                    </div>
+                        
+                    <div class="col-6">
+
+                    </div>
+
+                    </div>
+                </div>
+
+              </div>
+
+              <script>
+                new Chart(document.getElementById("line-chart"), {
+                  type: 'line',
+                  data: {
+                    //labels: [{% set labels = [] %}{% for method in methods.keys() %}{{ labels.append(method) }}{% endfor %}{{ labels|join(',') }}],
+                    labels: ["","Precision","Recall","F1","MAP","MRR",""],
+                    datasets: [{ 
+                        data: [0,0.014,0.025,0.017,0.032,0.049,0],
+                        label: "RAND",
+                        borderColor: "#85c1e9",
+                        backgroundColor: "#85c1e9",
+                        fill: false
+                      }, { 
+                        data: [0,0.016,0.027,0.019,0.039,0.042,0],
+                        label: "FB-ED",
+                        borderColor: "#a9dfbf",
+                        backgroundColor: "#a9dfbf",
+                        fill: false
+                      }, { 
+                        data: [0,0.020,0.029,0.022,0.042,0.074,0],
+                        label: "FB-CS",
+                        borderColor: "#daf7a6",
+                        backgroundColor: "#daf7a6",
+                        fill: false
+                      }, { 
+                        data: [0,0.068,0.113,0.079,0.382,0.184,0],
+                        label: "PT-T",
+                        borderColor: "#ffc300",
+                        backgroundColor: "#ffc300",
+                        fill: false
+                      }, { 
+                        data: [0,0.061,0.111,0.073,0.321,0.300,0],
+                        label: "PT(P)-ED",
+                        borderColor: "#ff5733",
+                        backgroundColor: "#ff5733",
+                        fill: false
+                      }, { 
+                        data: [0,0.072,0.123,0.085,0.410,0.344,0],
+                        label: "PT(P)-CS",
+                        borderColor: "#c70039",
+                        backgroundColor: "#c70039",
+                        fill: false
+                      }
+                    ]
+                  },
+                  options: {
+                    title: {
+                      display: false,
+                      text: 'Performance summary'
+                    },
+                    legend: {
+                      position: 'bottom',
+                      labels: {
+                        boxWidth: 15
+                      }
+                    },
+                    layout: {
+                      padding: {
+                        top: 15,
+                        right: 15
+                      }
+                    }
+                  }
+                });
+              </script>
+
+              <div class="row scrolling-wrapper-flexbox">
+
+                  {% if random %}
+
+                  <div class="method-col">
+                    
+                    <div class="card card-method shadow-sm">
+                      <div class="card-header">
+                        <h3>Random</h3>
+                        <h5>For comparison</h5>
+                      </div>
+                      
+                    <div class="card card-general-metrics">
+                      <div class="card-header">
+                        Metrics
+                      </div>
+                      <ul class="list-group list-group-flush">
+
+                        {% for key, value in methods_info['random'].items() %}
+                          <li class="list-group-item">{{ key }}<span class="value">{{ "%.3f"|format(value|round(3)) }}<!--{% if key == "Correctly predicted" %}/{{ users_info[user]['test_songs']|length }}{% endif %}--></span></li>
+                        {% endfor %}
+
+                      </ul>
+                    </div>
+                    
+                    </div>
+                        
+                  </div>
+
+                  {% endif %}
+                  
+                  {% for method in methods.keys() %}
+
+                  <div class="method-col">
+                    
+                    <div class="card card-method shadow-sm">
+                      <div class="card-header">
+                        <h3>{{ methods[method].title }}</h3>
+                        <h5>{{ methods[method].subtitle }}</h5>
+                      </div>
+                      
+                    <div class="card card-general-metrics">
+                      <div class="card-header">
+                        Metrics
+                      </div>
+                      <ul class="list-group list-group-flush">
+
+                        {% for key, value in methods_info[method].items() %}
+                          <li class="list-group-item{% set vars = {'max_value': 0}%}{% for method in methods.keys() %}{% set metric_value = methods_info[method][key]|round(3) %}{% if metric_value >= vars.max_value %}{% if vars.update({'max_value': metric_value}) %} {% endif %}{% endif %}{% endfor %}{% set current_metric_value = methods_info[method][key]|round(3) %}{% if current_metric_value >= vars.max_value %}{% if current_metric_value > 0 %} best {% endif %}{% endif %}">{{ key }}<span class="value">{{ "%.3f"|format(methods_info[method][key]|round(3)) }}<!--{% if key == "Correctly predicted" %}/{{ users_info[user]['test_songs']|length }}{% endif %}--></span></li>
+                        {% endfor %}
+
+                      </ul>
+                    </div>
+                    
+                    </div>
+                        
+                  </div>
+
+                  {% endfor %}
+
+              </div>
+                  
+              
+          </div>
+          
+          {% for user in users_list %}
+
+            <div class="tab-pane fade" id="list-{{ user }}" role="tabpanel" aria-labelledby="list-{{ user }}-list">
+              
+            <div class="row" style="width: 100%;">
+                
+                <div class="col-6">
+                    <div class="card card-method shadow-sm" style="flex-direction: row; margin-right: 0; margin-bottom: 0;">
+                        
+                    <div class="col-6">
+                        <div class="card-header">
+                          <h3>Train set</h3>
+                          <h5>{{ users_info[user]['train_songs']|length }} songs</h5>
+                        </div>
+                        <div class="card card-general">
+                          <div class="card-header">
+                            <span class="name">Most popular tags</span><br>
+                              <span class="number">Elec.</span>
+                              <span class="number">Rock</span>
+                              <span class="number">RnB</span>
+                          </div>
+                        </div>
+                    </div>
+                        
+                    <div class="col-6">
+                        <ul class="list-group list-group-flush song-list">
+                        {% for song in users_info[user]['train_songs'] %}
+                          <li class="list-group-item">
+                              <span class="song scroll_contant">{{ songs_info[song].title }} - {{ songs_info[song].artist }}</span><br>
+                              <span class="tag">{{ songs_info[song].tag }}</span>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                    </div>
+                </div>
+                
+                <div class="col-6">
+                    <div class="card card-method shadow-sm" style="flex-direction: row; margin-left: 1em; margin-right: -1em; margin-bottom: 0;">
+                        
+                    <div class="col-6">
+                        <div class="card-header">
+                          <h3>Test set</h3>
+                          <h5>{{ users_info[user]['test_songs']|length }} songs</h5>
+                        </div>
+                        <div class="card card-general">
+                          <div class="card-header">
+                            <span class="name">Most popular tags</span><br>
+                            <span class="number">Rock</span>
+                            <span class="number">Pop</span>
+                            <span class="number">Indie</span>
+                          </div>
+                        </div>
+                    </div>
+                        
+                    <div class="col-6">
+                        <ul class="list-group list-group-flush song-list">
+                        {% for song in users_info[user]['test_songs'] %}
+                          <li class="list-group-item">
+                              <span class="song scroll_contant">{{ songs_info[song].title }} - {{ songs_info[song].artist }}</span><br>
+                              <span class="tag">{{ songs_info[song].tag }}</span>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                    </div>
+                </div>
+                
+            </div>
+              
+              <div class="row scrolling-wrapper-flexbox">
+                  
+                  {% for method in methods.keys() %}
+
+                  <div class="method-col">
+                    
+                    <div class="card card-method shadow-sm">
+                      <div class="card-header">
+                        <h3>{{ methods[method].title }}</h3>
+                        <h5>{{ methods[method].subtitle }}</h5>
+                      </div>
+                      
+                    <div class="card card-metrics">
+                      <div class="card-header">
+                        Metrics
+                      </div>
+                      <ul class="list-group list-group-flush">
+
+                        {% for key, value in metrics.items() %}
+                          <li class="list-group-item{% set vars = {'max_value': 0}%}{% for method in methods.keys() %}{% set metric_value = results[user][method].metrics[value]|round(3) %}{% if metric_value >= vars.max_value %}{% if vars.update({'max_value': metric_value}) %} {% endif %}{% endif %}{% endfor %}{% set current_metric_value = results[user][method].metrics[value]|round(3) %}{% if current_metric_value >= vars.max_value %}{% if current_metric_value > 0 %} best {% endif %}{% endif %}">{{ key }}<span class="value">{% if key != "Correct Predictions" %} {{ "%.3f"|format(results[user][method].metrics[value]|round(3)) }} {% else %} {{ results[user][method].metrics[value] }} {% endif %}<!--{% if key == "Correctly predicted" %}/{{ users_info[user]['test_songs']|length }}{% endif %}--></span></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                    <div class="card card-recommendations">  
+                      <div class="card-header">
+                        Recommended songs
+                      </div>
+                      <ul class="list-group list-group-flush">
+
+                        {% for song in results[user][method].recommendations %}
+                        <li class="list-group-item {% if song in users_info[user]['test_songs'] %} correct {% endif %} ">
+                            <span class="song scroll_contant">{{loop.index}}. {{ songs_info[song].title }} - {{ songs_info[song].artist }}</span><br>
+                            <span class="tag">{{ songs_info[song].tag }}</span>
+                        </li>
+                        {% endfor %}
+
+                      </ul>
+                    </div>
+                    
+                    </div>
+                        
+                  </div>
+
+                  {% endfor %}
+
+              </div>
+              
+          </div>
+          
+          {% endfor %}
+            
+        </div>
+      </div>
+    </div>
+        
+    </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+      
+    <script type="text/javascript" src="static/script.js"></script>
+  </body>
+</html>
